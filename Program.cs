@@ -14,19 +14,17 @@ namespace SortNetlist
 
             var lines = System.IO.File.ReadAllLines(fileName);
             int counter = 0;
-            string[] separators = { "," };
+            string[] separators = { ",", "\t" };
 
             foreach (string line in lines) {
                 if (counter >= 7 && counter < lines.Length - 1) {
                     string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
                     for (int i=0; i<words.Length; i++) {
-                        if (i != 1) {
-                            if (i == 2) {
-                                fileOutput.Write(words[i].Substring(0, words[i].Length - 2));
-                            }
-                            else {
-                                fileOutput.Write(words[i] + "\t");
-                            }
+                        if (i == 0) {
+                            fileOutput.Write(words[i].Substring(4) + "\t");
+                        }
+                        else if (i == 2) {
+                            fileOutput.Write(words[i].Substring(0, words[i].Length - 2));
                         }
                     }
                     fileOutput.WriteLine();
