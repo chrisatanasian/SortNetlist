@@ -1,7 +1,7 @@
 // SortNetlist.cpp : main project file.
 
 #include "stdafx.h"
-#include "Form1.h"
+#include "MainForm.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -154,6 +154,6 @@ int main(array<System::String ^> ^args)
 	//cout << "Done sorting.";
 
 	// Create the main window and run it
-	Application::Run(gcnew Form1());
+	Application::Run(gcnew MainForm());
 	return 0;
 }
