@@ -83,9 +83,9 @@ namespace SortNetlist
 
         // sorts the netlist by checking the left column to see if strings are different by 1
         // outputs the sorted list into a new file called sortedNetlist.txt
-        static void sortNetlist(string fileName) {
+        // also adds the deltas in a new column
+        static void sortNetlistAddDelta(string fileName) {
             StreamWriter fileOutput = new StreamWriter(fileName);
-
             Dictionary<string, double> addedKeys = new Dictionary<string, double>();
 
             foreach (KeyValuePair<string, double> entry in netlist) {
@@ -96,7 +96,7 @@ namespace SortNetlist
 
                 string key_with_p = entry.Key.Replace("_N", "_P");
                 if (netlist.ContainsKey(key_with_p) && !addedKeys.ContainsKey(key_with_p)) {
-                    fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p]);
+                    fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]));
                     addedKeys[key_with_p] = netlist[key_with_p];
                 }
             }
@@ -116,7 +116,7 @@ namespace SortNetlist
             //Console.WriteLine(stringsDifferByOne("FMC2_LA_N26", "FMC2_LA_P26"));
             convertRawToProcessed(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw.txt");
             addToDictionary(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed.txt");
-            sortNetlist(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed_sorted.txt");
+            sortNetlistAddDelta(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed_sorted.txt");
         }
     }
 }
