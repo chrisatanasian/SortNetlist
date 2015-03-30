@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SortNetlist
 {
     static class Program
     {
+        static Dictionary<string, double> netlist = new Dictionary<string, double>();
+
         static void convertRawToProcessed(string fileName) {
+            var lines = System.IO.File.ReadAllLines(fileName);
             StreamWriter fileOutput = new StreamWriter(fileName.Substring(0, fileName.Length - 4) + "_processed.txt");
 
-            var lines = System.IO.File.ReadAllLines(fileName);
             int counter = 0;
             string[] separators = { ",", "\t" };
 
@@ -65,14 +68,39 @@ namespace SortNetlist
             }
         }
 
+        static void addToDictionary(string fileName) {
+            var lines = System.IO.File.ReadAllLines(fileName);
+
+            string[] separators = { "\t" };
+
+            foreach (string line in lines) {
+                string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                netlist[words[0]] = Convert.ToDouble(words[1]);
+            }
+        }
+
+
+
         // sorts the netlist by checking the left column to see if strings are different by 1
         // outputs the sorted list into a new file called sortedNetlist.txt
-        //static void sortNetlist(string filename) {
-        //    StreamReader fileInput = new StreamReader(filename);
-        //    StreamWriter fileOutput = new StreamWriter(filename.Substring(0, filename.Length - 4) + "_sorted.txt");
+        static void sortNetlist(string fileName) {
+            StreamWriter fileOutput = new StreamWriter(fileName);
 
-            
-        //}
+            Dictionary<string, double> addedKeys = new Dictionary<string, double>();
+
+            foreach (KeyValuePair<string, double> entry in netlist) {
+                if (!addedKeys.ContainsKey(entry.Key)) {
+                    fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
+                    addedKeys[entry.Key] = entry.Value;
+                }
+
+                string key_with_p = entry.Key.Replace("_N", "_P");
+                if (netlist.ContainsKey(key_with_p) && !addedKeys.ContainsKey(key_with_p)) {
+                    fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p]);
+                    addedKeys[key_with_p] = netlist[key_with_p];
+                }
+            }
+        }
 
         /// <summary>
         /// The main entry point for the application.
@@ -87,6 +115,8 @@ namespace SortNetlist
 
             //Console.WriteLine(stringsDifferByOne("FMC2_LA_N26", "FMC2_LA_P26"));
             convertRawToProcessed(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw.txt");
+            addToDictionary(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed.txt");
+            sortNetlist(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed_sorted.txt");
         }
     }
 }
