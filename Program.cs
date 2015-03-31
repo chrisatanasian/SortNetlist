@@ -4,15 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Collections.Generic;
 
 namespace SortNetlist
 {
     static class Program
     {
-        static Dictionary<string, double> netlist = new Dictionary<string, double>();
+        private static Dictionary<string, double> netlist = new Dictionary<string, double>();
 
-        static void convertRawToProcessed(string fileName) {
+        public static void convertRawToProcessed(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
             StreamWriter fileOutput = new StreamWriter(fileName.Substring(0, fileName.Length - 4) + "_processed.txt");
 
@@ -39,7 +38,7 @@ namespace SortNetlist
         }
 
         // return whether strings of the same size differ by 1 char AND if they differ by a n/p or a +/-
-        static bool stringsDifferByOne(string string1, string string2) {
+        public static bool stringsDifferByOne(string string1, string string2) {
             int amtDiffer = 0;
             int difference = 0;
 
@@ -68,7 +67,7 @@ namespace SortNetlist
             }
         }
 
-        static void addToDictionary(string fileName) {
+        public static void addToDictionary(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
 
             string[] separators = { "\t" };
@@ -84,7 +83,7 @@ namespace SortNetlist
         // sorts the netlist by checking the left column to see if strings are different by 1
         // outputs the sorted list into a new file called sortedNetlist.txt
         // also adds the deltas in a new column
-        static void sortNetlistAddDelta(string fileName) {
+        public static void sortNetlistAddDelta(string fileName) {
             StreamWriter fileOutput = new StreamWriter(fileName);
             Dictionary<string, double> addedKeys = new Dictionary<string, double>();
 
@@ -111,12 +110,7 @@ namespace SortNetlist
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainForm mf = new MainForm();
-            //Application.Run(mf);
-
-            //Console.WriteLine(stringsDifferByOne("FMC2_LA_N26", "FMC2_LA_P26"));
-            convertRawToProcessed(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw.txt");
-            addToDictionary(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed.txt");
-            sortNetlistAddDelta(@"C:\Users\Chris\Desktop\SortNetlist\netlist_raw_processed_sorted.txt");
+            Application.Run(mf);
         }
     }
 }

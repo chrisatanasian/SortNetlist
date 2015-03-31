@@ -20,8 +20,8 @@ namespace SortNetlist
 
         public string FileName
         {
-            get { return TextBoxFileName.Text; }
-            set { TextBoxFileName.Text = value; }
+            get { return TextBoxRawFile.Text; }
+            set { TextBoxRawFile.Text = value; }
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
@@ -29,8 +29,29 @@ namespace SortNetlist
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                string file = openFileDialog1.FileName;
-                TextBoxFileName.Text = file;
+                string fileName = openFileDialog1.FileName;
+                TextBoxRawFile.Text = fileName;
+            }
+        }
+
+        private void ButtonProcessRawFile_Click(object sender, EventArgs e) {
+            if (!String.IsNullOrEmpty(TextBoxRawFile.Text)) {
+                Program.convertRawToProcessed(TextBoxRawFile.Text);
+            }
+        }
+
+        private void ButtonBrowse2_Click(object sender, EventArgs e) {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK) {
+                string fileName = openFileDialog1.FileName;
+                TextBoxSort.Text = fileName;
+            }
+        }
+
+        private void ButtonSort_Click(object sender, EventArgs e) {
+            if (!String.IsNullOrEmpty(TextBoxSort.Text)) {
+                Program.addToDictionary(TextBoxSort.Text);
+                Program.sortNetlistAddDelta(TextBoxSort.Text.Replace(".txt", "_sorted.txt"));
             }
         }
     }
