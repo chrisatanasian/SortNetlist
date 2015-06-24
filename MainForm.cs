@@ -24,14 +24,24 @@ namespace SortNetlist
             set { TextBoxRawFile.Text = value; }
         }
 
-        private void ButtonBrowse_Click(object sender, EventArgs e)
-        {
+        private void Browse(TextBox sender) {
             DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+            if (result == DialogResult.OK) {
                 string fileName = openFileDialog1.FileName;
-                TextBoxRawFile.Text = fileName;
+                sender.Text = fileName;
             }
+        }
+
+        private void ButtonBrowse_Click(object sender, EventArgs e) {
+            Browse(TextBoxRawFile);
+        }
+
+        private void ButtonBrowse2_Click(object sender, EventArgs e) {
+            Browse(TextBoxSort);
+        }
+
+        private void ButtonBrowse3_Click(object sender, EventArgs e) {
+            Browse(TextBoxGroup);
         }
 
         private void ButtonProcessRawFile_Click(object sender, EventArgs e) {
@@ -39,15 +49,6 @@ namespace SortNetlist
                 Program.ConvertRawToProcessed(TextBoxRawFile.Text);
             }
         }
-
-        private void ButtonBrowse2_Click(object sender, EventArgs e) {
-            DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK) {
-                string fileName = openFileDialog1.FileName;
-                TextBoxSort.Text = fileName;
-            }
-        }
-
         private void ButtonSort_Click(object sender, EventArgs e) {
             if (!String.IsNullOrEmpty(TextBoxSort.Text)) {
                 Program.AddToDictionary(TextBoxSort.Text);
@@ -55,5 +56,6 @@ namespace SortNetlist
                 Program.ClearNetlist();
             }
         }
+
     }
 }

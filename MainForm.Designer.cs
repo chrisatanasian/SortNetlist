@@ -37,6 +37,10 @@
             this.ButtonSort = new System.Windows.Forms.Button();
             this.TextBoxSort = new System.Windows.Forms.TextBox();
             this.ButtonBrowse2 = new System.Windows.Forms.Button();
+            this.LabelGroup = new System.Windows.Forms.Label();
+            this.ButtonGroup = new System.Windows.Forms.Button();
+            this.TextBoxGroup = new System.Windows.Forms.TextBox();
+            this.ButtonBrowse3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ButtonBrowse
@@ -115,11 +119,50 @@
             this.ButtonBrowse2.UseVisualStyleBackColor = true;
             this.ButtonBrowse2.Click += new System.EventHandler(this.ButtonBrowse2_Click);
             // 
+            // LabelGroup
+            // 
+            this.LabelGroup.AutoSize = true;
+            this.LabelGroup.Location = new System.Drawing.Point(25, 168);
+            this.LabelGroup.Name = "LabelGroup";
+            this.LabelGroup.Size = new System.Drawing.Size(36, 13);
+            this.LabelGroup.TabIndex = 11;
+            this.LabelGroup.Text = "Group";
+            // 
+            // ButtonGroup
+            // 
+            this.ButtonGroup.Location = new System.Drawing.Point(28, 210);
+            this.ButtonGroup.Name = "ButtonGroup";
+            this.ButtonGroup.Size = new System.Drawing.Size(181, 23);
+            this.ButtonGroup.TabIndex = 10;
+            this.ButtonGroup.Text = "Print Groups";
+            this.ButtonGroup.UseVisualStyleBackColor = true;
+            // 
+            // TextBoxGroup
+            // 
+            this.TextBoxGroup.Location = new System.Drawing.Point(28, 184);
+            this.TextBoxGroup.Name = "TextBoxGroup";
+            this.TextBoxGroup.Size = new System.Drawing.Size(181, 20);
+            this.TextBoxGroup.TabIndex = 9;
+            // 
+            // ButtonBrowse3
+            // 
+            this.ButtonBrowse3.Location = new System.Drawing.Point(215, 181);
+            this.ButtonBrowse3.Name = "ButtonBrowse3";
+            this.ButtonBrowse3.Size = new System.Drawing.Size(57, 23);
+            this.ButtonBrowse3.TabIndex = 8;
+            this.ButtonBrowse3.Text = "browse";
+            this.ButtonBrowse3.UseVisualStyleBackColor = true;
+            this.ButtonBrowse3.Click += new System.EventHandler(this.ButtonBrowse3_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.LabelGroup);
+            this.Controls.Add(this.ButtonGroup);
+            this.Controls.Add(this.TextBoxGroup);
+            this.Controls.Add(this.ButtonBrowse3);
             this.Controls.Add(this.LabelSort);
             this.Controls.Add(this.ButtonSort);
             this.Controls.Add(this.TextBoxSort);
@@ -146,6 +189,10 @@
         private System.Windows.Forms.Button ButtonSort;
         private System.Windows.Forms.TextBox TextBoxSort;
         private System.Windows.Forms.Button ButtonBrowse2;
+        private System.Windows.Forms.Label LabelGroup;
+        private System.Windows.Forms.Button ButtonGroup;
+        private System.Windows.Forms.TextBox TextBoxGroup;
+        private System.Windows.Forms.Button ButtonBrowse3;
     }
 }
 

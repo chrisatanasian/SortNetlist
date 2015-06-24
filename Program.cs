@@ -124,7 +124,10 @@ namespace SortNetlist
         }
 
         public static void PrintGroups(string fileName) {
-        
+            StreamWriter fileOutput = new StreamWriter(fileName);
+            Dictionary<string, double> addedKeys = new Dictionary<string, double>();
+
+
         }
 
         /// <summary>
