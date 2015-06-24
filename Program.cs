@@ -11,6 +11,60 @@ namespace SortNetlist
     {
         private static Dictionary<string, double> netlist = new Dictionary<string, double>();
 
+        /// <summary>
+        /// Adds contents of fileName to netlist data
+        /// </summary>
+        public static void addToDictionary(string fileName) {
+            var lines = System.IO.File.ReadAllLines(fileName);
+
+            string[] separators = { "\t" };
+
+            foreach (string line in lines) {
+                string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                netlist[words[0]] = Convert.ToDouble(words[1]);
+            }
+        }
+
+        /// <summary>
+        /// Determines whether strings of the same size differ by 1 char AND if they differ by a n/p or a +/-.
+        /// </summary>
+        public static bool stringsDifferByOne(string string1, string string2) {
+            int amtDiffer = 0;
+            int difference = 0;
+
+            if (string1.Length != string2.Length) {
+                return false;
+            }
+            
+            for (int i=0; i<string1.Length; i++) {
+                if (string1[i] != string2[i]) {
+                    amtDiffer += 1;
+
+                    if ((string1[i] == 'N' && string2[i] == 'P') || (string2[i] == 'N' && string1[i] == 'P')) {
+                        difference++;
+                    }
+                    else if ((string1[i] == '+' && string2[i] == '-') || (string2[i] == '+' && string1[i] == '-')) {
+                        difference++;
+                    }
+                }
+                if (amtDiffer > 1 || difference > 1)
+                    return false;
+            }
+
+            if (amtDiffer == 0) {
+                return false;
+            }
+            else {
+                return (difference == 1);
+            }
+        }
+
+        /// <summary>
+        /// Takes a raw netlist file, which contains useless data in the beginning and end, and removes it.
+        /// Also removes data except for the first and last parts.
+        /// Outputs the new file with _processed.txt at the end.
+        /// </summary>
+        /// <param name="fileName">Name of the file to process.</param>
         public static void convertRawToProcessed(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
             StreamWriter fileOutput = new StreamWriter(fileName.Substring(0, fileName.Length - 4) + "_processed.txt");
@@ -21,7 +75,7 @@ namespace SortNetlist
             foreach (string line in lines) {
                 if (counter >= 7 && counter < lines.Length - 1) {
                     string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                    for (int i=0; i<words.Length; i++) {
+                    for (int i = 0; i < words.Length; i++) {
                         if (i == 0) {
                             fileOutput.Write(words[i].Substring(4) + "\t");
                         }
@@ -37,52 +91,11 @@ namespace SortNetlist
             fileOutput.Close();
         }
 
-        // return whether strings of the same size differ by 1 char AND if they differ by a n/p or a +/-
-        public static bool stringsDifferByOne(string string1, string string2) {
-            int amtDiffer = 0;
-            int difference = 0;
-
-            if (string1.Length != string2.Length)
-                return false;
-            
-            for (int i=0; i<string1.Length; i++) {
-                if (string1[i] != string2[i]) {
-                    amtDiffer+=1;
-                    if ((string1[i] == 'N' && string2[i] == 'P') || (string2[i] == 'N' && string1[i] == 'P'))
-                        difference += 1;
-                    else if ((string1[i] == '+' && string2[i] == '-') || (string2[i] == '+' && string1[i] == '-'))
-                        difference += 1;
-                }
-                if (amtDiffer > 1 || difference > 1)
-                    return false;
-            }
-
-            if (amtDiffer == 0)
-                return false;
-            else {
-                if (difference == 1)
-                    return true;
-                else
-                    return false;
-            }
-        }
-
-        public static void addToDictionary(string fileName) {
-            var lines = System.IO.File.ReadAllLines(fileName);
-
-            string[] separators = { "\t" };
-
-            foreach (string line in lines) {
-                string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                netlist[words[0]] = Convert.ToDouble(words[1]);
-            }
-        }
-
-
-
-        // sorts the netlist by checking the left column to see if strings are different by 1
-        // outputs the sorted list into a new file called sortedNetlist.txt
-        // also adds the deltas in a new column
+        /// <summary>
+        /// Sorts the netlist by checking the left column to see if strings are different by 1.
+        /// Outputs the sorted list into a new file with _sorted.txt at the end.
+        /// Also adds the deltas in a new column.
+        /// </summary>
         public static void sortNetlistAddDelta(string fileName) {
             StreamWriter fileOutput = new StreamWriter(fileName);
             Dictionary<string, double> addedKeys = new Dictionary<string, double>();
@@ -105,8 +118,7 @@ namespace SortNetlist
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainForm mf = new MainForm();
