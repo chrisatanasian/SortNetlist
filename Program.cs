@@ -14,7 +14,7 @@ namespace SortNetlist
         /// <summary>
         /// Adds contents of fileName to netlist data
         /// </summary>
-        public static void addToDictionary(string fileName) {
+        public static void AddToDictionary(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
 
             string[] separators = { "\t" };
@@ -26,9 +26,16 @@ namespace SortNetlist
         }
 
         /// <summary>
+        /// Removes all elements from the netlist dictionary.
+        /// </summary>
+        public static void ClearNetlist() {
+            netlist.Clear();
+        }
+
+        /// <summary>
         /// Determines whether strings of the same size differ by 1 char AND if they differ by a n/p or a +/-.
         /// </summary>
-        public static bool stringsDifferByOne(string string1, string string2) {
+        public static bool StringsDifferByOne(string string1, string string2) {
             int amtDiffer = 0;
             int difference = 0;
 
@@ -65,7 +72,7 @@ namespace SortNetlist
         /// Outputs the new file with _processed.txt at the end.
         /// </summary>
         /// <param name="fileName">Name of the file to process.</param>
-        public static void convertRawToProcessed(string fileName) {
+        public static void ConvertRawToProcessed(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
             StreamWriter fileOutput = new StreamWriter(fileName.Substring(0, fileName.Length - 4) + "_processed.txt");
 
@@ -96,7 +103,7 @@ namespace SortNetlist
         /// Outputs the sorted list into a new file with _sorted.txt at the end.
         /// Also adds the deltas in a new column.
         /// </summary>
-        public static void sortNetlistAddDelta(string fileName) {
+        public static void SortNetlistAddDelta(string fileName) {
             StreamWriter fileOutput = new StreamWriter(fileName);
             Dictionary<string, double> addedKeys = new Dictionary<string, double>();
 
@@ -112,6 +119,12 @@ namespace SortNetlist
                     addedKeys[key_with_p] = netlist[key_with_p];
                 }
             }
+
+            fileOutput.Close();
+        }
+
+        public static void PrintGroups(string fileName) {
+        
         }
 
         /// <summary>

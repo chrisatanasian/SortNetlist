@@ -36,7 +36,7 @@ namespace SortNetlist
 
         private void ButtonProcessRawFile_Click(object sender, EventArgs e) {
             if (!String.IsNullOrEmpty(TextBoxRawFile.Text)) {
-                Program.convertRawToProcessed(TextBoxRawFile.Text);
+                Program.ConvertRawToProcessed(TextBoxRawFile.Text);
             }
         }
 
@@ -50,8 +50,9 @@ namespace SortNetlist
 
         private void ButtonSort_Click(object sender, EventArgs e) {
             if (!String.IsNullOrEmpty(TextBoxSort.Text)) {
-                Program.addToDictionary(TextBoxSort.Text);
-                Program.sortNetlistAddDelta(TextBoxSort.Text.Replace(".txt", "_sorted.txt"));
+                Program.AddToDictionary(TextBoxSort.Text);
+                Program.SortNetlistAddDelta(TextBoxSort.Text.Replace(".txt", "_sorted.txt"));
+                Program.ClearNetlist();
             }
         }
     }
