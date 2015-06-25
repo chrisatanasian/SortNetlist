@@ -33,6 +33,12 @@
             this.ButtonBrowseRaw = new System.Windows.Forms.Button();
             this.TextBoxRaw = new System.Windows.Forms.TextBox();
             this.ButtonRaw = new System.Windows.Forms.Button();
+            this.LabelGroups = new System.Windows.Forms.Label();
+            this.TextBoxGroups = new System.Windows.Forms.TextBox();
+            this.ButonProcessed = new System.Windows.Forms.Button();
+            this.TextBoxProcessed = new System.Windows.Forms.TextBox();
+            this.ButtonBrowseProcessed = new System.Windows.Forms.Button();
+            this.LabelProcessed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelRaw
@@ -46,7 +52,7 @@
             // 
             // ButtonBrowseRaw
             // 
-            this.ButtonBrowseRaw.Location = new System.Drawing.Point(196, 61);
+            this.ButtonBrowseRaw.Location = new System.Drawing.Point(189, 61);
             this.ButtonBrowseRaw.Name = "ButtonBrowseRaw";
             this.ButtonBrowseRaw.Size = new System.Drawing.Size(75, 23);
             this.ButtonBrowseRaw.TabIndex = 1;
@@ -63,7 +69,7 @@
             // 
             // ButtonRaw
             // 
-            this.ButtonRaw.Location = new System.Drawing.Point(44, 96);
+            this.ButtonRaw.Location = new System.Drawing.Point(44, 90);
             this.ButtonRaw.Name = "ButtonRaw";
             this.ButtonRaw.Size = new System.Drawing.Size(139, 23);
             this.ButtonRaw.TabIndex = 3;
@@ -71,17 +77,77 @@
             this.ButtonRaw.UseVisualStyleBackColor = true;
             this.ButtonRaw.Click += new System.EventHandler(this.ButtonRaw_Click);
             // 
+            // LabelGroups
+            // 
+            this.LabelGroups.AutoSize = true;
+            this.LabelGroups.Location = new System.Drawing.Point(296, 41);
+            this.LabelGroups.Name = "LabelGroups";
+            this.LabelGroups.Size = new System.Drawing.Size(41, 13);
+            this.LabelGroups.TabIndex = 4;
+            this.LabelGroups.Text = "Groups";
+            // 
+            // TextBoxGroups
+            // 
+            this.TextBoxGroups.Location = new System.Drawing.Point(299, 63);
+            this.TextBoxGroups.Name = "TextBoxGroups";
+            this.TextBoxGroups.Size = new System.Drawing.Size(139, 20);
+            this.TextBoxGroups.TabIndex = 5;
+            this.TextBoxGroups.Text = "FMC_LA, FMC_HA, FMC_HB";
+            this.TextBoxGroups.TextChanged += new System.EventHandler(this.TextBoxGroups_TextChanged);
+            // 
+            // ButonProcessed
+            // 
+            this.ButonProcessed.Location = new System.Drawing.Point(44, 174);
+            this.ButonProcessed.Name = "ButonProcessed";
+            this.ButonProcessed.Size = new System.Drawing.Size(139, 23);
+            this.ButonProcessed.TabIndex = 9;
+            this.ButonProcessed.Text = "Finsih Processed File";
+            this.ButonProcessed.UseVisualStyleBackColor = true;
+            this.ButonProcessed.Click += new System.EventHandler(this.ButonProcessed_Click);
+            // 
+            // TextBoxProcessed
+            // 
+            this.TextBoxProcessed.Location = new System.Drawing.Point(44, 147);
+            this.TextBoxProcessed.Name = "TextBoxProcessed";
+            this.TextBoxProcessed.Size = new System.Drawing.Size(139, 20);
+            this.TextBoxProcessed.TabIndex = 8;
+            // 
+            // ButtonBrowseProcessed
+            // 
+            this.ButtonBrowseProcessed.Location = new System.Drawing.Point(189, 145);
+            this.ButtonBrowseProcessed.Name = "ButtonBrowseProcessed";
+            this.ButtonBrowseProcessed.Size = new System.Drawing.Size(75, 23);
+            this.ButtonBrowseProcessed.TabIndex = 7;
+            this.ButtonBrowseProcessed.Text = "browse";
+            this.ButtonBrowseProcessed.UseVisualStyleBackColor = true;
+            this.ButtonBrowseProcessed.Click += new System.EventHandler(this.ButtonBrowseProcessed_Click);
+            // 
+            // LabelProcessed
+            // 
+            this.LabelProcessed.AutoSize = true;
+            this.LabelProcessed.Location = new System.Drawing.Point(41, 125);
+            this.LabelProcessed.Name = "LabelProcessed";
+            this.LabelProcessed.Size = new System.Drawing.Size(76, 13);
+            this.LabelProcessed.TabIndex = 6;
+            this.LabelProcessed.Text = "Processed File";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 325);
+            this.ClientSize = new System.Drawing.Size(530, 248);
+            this.Controls.Add(this.ButonProcessed);
+            this.Controls.Add(this.TextBoxProcessed);
+            this.Controls.Add(this.ButtonBrowseProcessed);
+            this.Controls.Add(this.LabelProcessed);
+            this.Controls.Add(this.TextBoxGroups);
+            this.Controls.Add(this.LabelGroups);
             this.Controls.Add(this.ButtonRaw);
             this.Controls.Add(this.TextBoxRaw);
             this.Controls.Add(this.ButtonBrowseRaw);
             this.Controls.Add(this.LabelRaw);
             this.Name = "MainForm";
-            this.Text = "Sort Netlist";
+            this.Text = "Sort Netlist by Chris Atanasian";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,6 +160,12 @@
         private System.Windows.Forms.Button ButtonBrowseRaw;
         private System.Windows.Forms.TextBox TextBoxRaw;
         private System.Windows.Forms.Button ButtonRaw;
+        private System.Windows.Forms.Label LabelGroups;
+        private System.Windows.Forms.TextBox TextBoxGroups;
+        private System.Windows.Forms.Button ButonProcessed;
+        private System.Windows.Forms.TextBox TextBoxProcessed;
+        private System.Windows.Forms.Button ButtonBrowseProcessed;
+        private System.Windows.Forms.Label LabelProcessed;
     }
 }
 

@@ -18,6 +18,10 @@ namespace SortNetlist
             InitializeComponent();
         }
 
+        private void TextBoxGroups_TextChanged(object sender, EventArgs e) {
+            Program.ChangeGroups(TextBoxGroups.Text);
+        }
+
         private void Browse(TextBox sender) {
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK) {
@@ -28,6 +32,10 @@ namespace SortNetlist
 
         private void ButtonBrowseRaw_Click(object sender, EventArgs e) {
             Browse(TextBoxRaw);
+        }
+
+        private void ButtonBrowseProcessed_Click(object sender, EventArgs e) {
+            Browse(TextBoxProcessed);
         }
 
         private void ButtonRaw_Click(object sender, EventArgs e) {
@@ -46,5 +54,18 @@ namespace SortNetlist
             }
         }
 
+        private void ButonProcessed_Click(object sender, EventArgs e) {
+            if (!String.IsNullOrEmpty(TextBoxProcessed.Text)) {
+                string fileName = TextBoxProcessed.Text;
+
+                Program.AddToDictionary(fileName);
+                Program.SortNetlistAddDelta(fileName);
+                Program.ClearDictionaries();
+                Program.AddToDictionary(fileName);
+                Program.FindGroupMaxs();
+                Program.AddDeltaGroupMaxDiffs(fileName);
+                Program.ClearDictionaries();
+            }
+        }
     }
 }

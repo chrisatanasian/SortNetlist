@@ -11,7 +11,7 @@ namespace SortNetlist
     {
         private static Dictionary<string, double> netlist = new Dictionary<string, double>();
         private static Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
-        private static string[] groups = { "FMC_LA", "FMC_HA", "FMC_HB" };
+        private static List<string> groups = new List<string> { "FMC_LA", "FMC_HA", "FMC_HB" };
 
         /// <summary>
         /// Adds contents of fileName to netlist data
@@ -33,6 +33,15 @@ namespace SortNetlist
         public static void ClearDictionaries() {
             netlist.Clear();
             groupMaxs.Clear();
+        }
+
+        public static void ChangeGroups(string groupTextBox) {
+            string[] groupNames = groupTextBox.Split(',');
+
+            groups.Clear();
+            foreach (string groupName in groupNames) {
+                groups.Add(groupName.Replace(" ", ""));
+            }
         }
 
         /// <summary>
@@ -132,10 +141,9 @@ namespace SortNetlist
         public static void FindGroupMaxs() {
             double currentMax = -1;
             string currentKey = "";
+            int len = groups[0].Length;
 
             foreach (KeyValuePair<string, double> entry in netlist) {
-                int len = groups[0].Length;
-
                 if (entry.Key.Length >= len) {
                     string key = entry.Key.Substring(0, len);
 
