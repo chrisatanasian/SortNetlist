@@ -28,150 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ButtonBrowse = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.TextBoxRawFile = new System.Windows.Forms.TextBox();
-            this.ButtonProcessRawFile = new System.Windows.Forms.Button();
-            this.LabelRawFile = new System.Windows.Forms.Label();
-            this.LabelSort = new System.Windows.Forms.Label();
-            this.ButtonSort = new System.Windows.Forms.Button();
-            this.TextBoxSort = new System.Windows.Forms.TextBox();
-            this.ButtonBrowse2 = new System.Windows.Forms.Button();
-            this.LabelGroup = new System.Windows.Forms.Label();
-            this.ButtonGroup = new System.Windows.Forms.Button();
-            this.TextBoxGroup = new System.Windows.Forms.TextBox();
-            this.ButtonBrowse3 = new System.Windows.Forms.Button();
+            this.LabelRaw = new System.Windows.Forms.Label();
+            this.ButtonBrowseRaw = new System.Windows.Forms.Button();
+            this.TextBoxRaw = new System.Windows.Forms.TextBox();
+            this.ButtonRaw = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // ButtonBrowse
+            // LabelRaw
             // 
-            this.ButtonBrowse.Location = new System.Drawing.Point(215, 40);
-            this.ButtonBrowse.Name = "ButtonBrowse";
-            this.ButtonBrowse.Size = new System.Drawing.Size(57, 23);
-            this.ButtonBrowse.TabIndex = 0;
-            this.ButtonBrowse.Text = "browse";
-            this.ButtonBrowse.UseVisualStyleBackColor = true;
-            this.ButtonBrowse.Click += new System.EventHandler(this.ButtonBrowse_Click);
+            this.LabelRaw.AutoSize = true;
+            this.LabelRaw.Location = new System.Drawing.Point(41, 41);
+            this.LabelRaw.Name = "LabelRaw";
+            this.LabelRaw.Size = new System.Drawing.Size(48, 13);
+            this.LabelRaw.TabIndex = 0;
+            this.LabelRaw.Text = "Raw File";
             // 
-            // openFileDialog1
+            // ButtonBrowseRaw
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.ButtonBrowseRaw.Location = new System.Drawing.Point(196, 61);
+            this.ButtonBrowseRaw.Name = "ButtonBrowseRaw";
+            this.ButtonBrowseRaw.Size = new System.Drawing.Size(75, 23);
+            this.ButtonBrowseRaw.TabIndex = 1;
+            this.ButtonBrowseRaw.Text = "browse";
+            this.ButtonBrowseRaw.UseVisualStyleBackColor = true;
+            this.ButtonBrowseRaw.Click += new System.EventHandler(this.ButtonBrowseRaw_Click);
             // 
-            // TextBoxRawFile
+            // TextBoxRaw
             // 
-            this.TextBoxRawFile.Location = new System.Drawing.Point(28, 43);
-            this.TextBoxRawFile.Name = "TextBoxRawFile";
-            this.TextBoxRawFile.Size = new System.Drawing.Size(181, 20);
-            this.TextBoxRawFile.TabIndex = 1;
+            this.TextBoxRaw.Location = new System.Drawing.Point(44, 63);
+            this.TextBoxRaw.Name = "TextBoxRaw";
+            this.TextBoxRaw.Size = new System.Drawing.Size(139, 20);
+            this.TextBoxRaw.TabIndex = 2;
             // 
-            // ButtonProcessRawFile
+            // ButtonRaw
             // 
-            this.ButtonProcessRawFile.Location = new System.Drawing.Point(28, 69);
-            this.ButtonProcessRawFile.Name = "ButtonProcessRawFile";
-            this.ButtonProcessRawFile.Size = new System.Drawing.Size(181, 23);
-            this.ButtonProcessRawFile.TabIndex = 2;
-            this.ButtonProcessRawFile.Text = "Process Raw File";
-            this.ButtonProcessRawFile.UseVisualStyleBackColor = true;
-            this.ButtonProcessRawFile.Click += new System.EventHandler(this.ButtonProcessRawFile_Click);
-            // 
-            // LabelRawFile
-            // 
-            this.LabelRawFile.AutoSize = true;
-            this.LabelRawFile.Location = new System.Drawing.Point(25, 27);
-            this.LabelRawFile.Name = "LabelRawFile";
-            this.LabelRawFile.Size = new System.Drawing.Size(48, 13);
-            this.LabelRawFile.TabIndex = 3;
-            this.LabelRawFile.Text = "Raw File";
-            // 
-            // LabelSort
-            // 
-            this.LabelSort.AutoSize = true;
-            this.LabelSort.Location = new System.Drawing.Point(25, 98);
-            this.LabelSort.Name = "LabelSort";
-            this.LabelSort.Size = new System.Drawing.Size(26, 13);
-            this.LabelSort.TabIndex = 7;
-            this.LabelSort.Text = "Sort";
-            // 
-            // ButtonSort
-            // 
-            this.ButtonSort.Location = new System.Drawing.Point(28, 140);
-            this.ButtonSort.Name = "ButtonSort";
-            this.ButtonSort.Size = new System.Drawing.Size(181, 23);
-            this.ButtonSort.TabIndex = 6;
-            this.ButtonSort.Text = "Sort Processed File";
-            this.ButtonSort.UseVisualStyleBackColor = true;
-            this.ButtonSort.Click += new System.EventHandler(this.ButtonSort_Click);
-            // 
-            // TextBoxSort
-            // 
-            this.TextBoxSort.Location = new System.Drawing.Point(28, 114);
-            this.TextBoxSort.Name = "TextBoxSort";
-            this.TextBoxSort.Size = new System.Drawing.Size(181, 20);
-            this.TextBoxSort.TabIndex = 5;
-            // 
-            // ButtonBrowse2
-            // 
-            this.ButtonBrowse2.Location = new System.Drawing.Point(215, 111);
-            this.ButtonBrowse2.Name = "ButtonBrowse2";
-            this.ButtonBrowse2.Size = new System.Drawing.Size(57, 23);
-            this.ButtonBrowse2.TabIndex = 4;
-            this.ButtonBrowse2.Text = "browse";
-            this.ButtonBrowse2.UseVisualStyleBackColor = true;
-            this.ButtonBrowse2.Click += new System.EventHandler(this.ButtonBrowse2_Click);
-            // 
-            // LabelGroup
-            // 
-            this.LabelGroup.AutoSize = true;
-            this.LabelGroup.Location = new System.Drawing.Point(25, 168);
-            this.LabelGroup.Name = "LabelGroup";
-            this.LabelGroup.Size = new System.Drawing.Size(36, 13);
-            this.LabelGroup.TabIndex = 11;
-            this.LabelGroup.Text = "Group";
-            // 
-            // ButtonGroup
-            // 
-            this.ButtonGroup.Location = new System.Drawing.Point(28, 210);
-            this.ButtonGroup.Name = "ButtonGroup";
-            this.ButtonGroup.Size = new System.Drawing.Size(181, 23);
-            this.ButtonGroup.TabIndex = 10;
-            this.ButtonGroup.Text = "Print Groups";
-            this.ButtonGroup.UseVisualStyleBackColor = true;
-            this.ButtonGroup.Click += new System.EventHandler(this.ButtonGroup_Click);
-            // 
-            // TextBoxGroup
-            // 
-            this.TextBoxGroup.Location = new System.Drawing.Point(28, 184);
-            this.TextBoxGroup.Name = "TextBoxGroup";
-            this.TextBoxGroup.Size = new System.Drawing.Size(181, 20);
-            this.TextBoxGroup.TabIndex = 9;
-            // 
-            // ButtonBrowse3
-            // 
-            this.ButtonBrowse3.Location = new System.Drawing.Point(215, 181);
-            this.ButtonBrowse3.Name = "ButtonBrowse3";
-            this.ButtonBrowse3.Size = new System.Drawing.Size(57, 23);
-            this.ButtonBrowse3.TabIndex = 8;
-            this.ButtonBrowse3.Text = "browse";
-            this.ButtonBrowse3.UseVisualStyleBackColor = true;
-            this.ButtonBrowse3.Click += new System.EventHandler(this.ButtonBrowse3_Click);
+            this.ButtonRaw.Location = new System.Drawing.Point(44, 96);
+            this.ButtonRaw.Name = "ButtonRaw";
+            this.ButtonRaw.Size = new System.Drawing.Size(139, 23);
+            this.ButtonRaw.TabIndex = 3;
+            this.ButtonRaw.Text = "Process Raw File";
+            this.ButtonRaw.UseVisualStyleBackColor = true;
+            this.ButtonRaw.Click += new System.EventHandler(this.ButtonRaw_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.LabelGroup);
-            this.Controls.Add(this.ButtonGroup);
-            this.Controls.Add(this.TextBoxGroup);
-            this.Controls.Add(this.ButtonBrowse3);
-            this.Controls.Add(this.LabelSort);
-            this.Controls.Add(this.ButtonSort);
-            this.Controls.Add(this.TextBoxSort);
-            this.Controls.Add(this.ButtonBrowse2);
-            this.Controls.Add(this.LabelRawFile);
-            this.Controls.Add(this.ButtonProcessRawFile);
-            this.Controls.Add(this.TextBoxRawFile);
-            this.Controls.Add(this.ButtonBrowse);
+            this.ClientSize = new System.Drawing.Size(284, 325);
+            this.Controls.Add(this.ButtonRaw);
+            this.Controls.Add(this.TextBoxRaw);
+            this.Controls.Add(this.ButtonBrowseRaw);
+            this.Controls.Add(this.LabelRaw);
             this.Name = "MainForm";
             this.Text = "Sort Netlist";
             this.ResumeLayout(false);
@@ -181,19 +89,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button ButtonBrowse;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox TextBoxRawFile;
-        private System.Windows.Forms.Button ButtonProcessRawFile;
-        private System.Windows.Forms.Label LabelRawFile;
-        private System.Windows.Forms.Label LabelSort;
-        private System.Windows.Forms.Button ButtonSort;
-        private System.Windows.Forms.TextBox TextBoxSort;
-        private System.Windows.Forms.Button ButtonBrowse2;
-        private System.Windows.Forms.Label LabelGroup;
-        private System.Windows.Forms.Button ButtonGroup;
-        private System.Windows.Forms.TextBox TextBoxGroup;
-        private System.Windows.Forms.Button ButtonBrowse3;
+        private System.Windows.Forms.Label LabelRaw;
+        private System.Windows.Forms.Button ButtonBrowseRaw;
+        private System.Windows.Forms.TextBox TextBoxRaw;
+        private System.Windows.Forms.Button ButtonRaw;
     }
 }
 

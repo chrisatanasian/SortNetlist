@@ -18,12 +18,6 @@ namespace SortNetlist
             InitializeComponent();
         }
 
-        public string FileName
-        {
-            get { return TextBoxRawFile.Text; }
-            set { TextBoxRawFile.Text = value; }
-        }
-
         private void Browse(TextBox sender) {
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK) {
@@ -32,35 +26,21 @@ namespace SortNetlist
             }
         }
 
-        private void ButtonBrowse_Click(object sender, EventArgs e) {
-            Browse(TextBoxRawFile);
+        private void ButtonBrowseRaw_Click(object sender, EventArgs e) {
+            Browse(TextBoxRaw);
         }
 
-        private void ButtonBrowse2_Click(object sender, EventArgs e) {
-            Browse(TextBoxSort);
-        }
+        private void ButtonRaw_Click(object sender, EventArgs e) {
+            if (!String.IsNullOrEmpty(TextBoxRaw.Text)) {
+                Program.ConvertRawToProcessed(TextBoxRaw.Text);
 
-        private void ButtonBrowse3_Click(object sender, EventArgs e) {
-            Browse(TextBoxGroup);
-        }
+                string fileName = TextBoxRaw.Text.Replace(".txt", "_processed.txt");
 
-        private void ButtonProcessRawFile_Click(object sender, EventArgs e) {
-            if (!String.IsNullOrEmpty(TextBoxRawFile.Text)) {
-                Program.ConvertRawToProcessed(TextBoxRawFile.Text);
-            }
-        }
-        private void ButtonSort_Click(object sender, EventArgs e) {
-            if (!String.IsNullOrEmpty(TextBoxSort.Text)) {
-                Program.AddToDictionary(TextBoxSort.Text);
-                Program.SortNetlistAddDelta(TextBoxSort.Text.Replace(".txt", "_sorted.txt"));
+                Program.AddToDictionary(fileName);
+                Program.SortNetlistAddDelta(fileName);
                 Program.ClearNetlist();
-            }
-        }
-
-        private void ButtonGroup_Click(object sender, EventArgs e) {
-            if (!String.IsNullOrEmpty(TextBoxGroup.Text)) {
-                Program.AddToDictionary(TextBoxGroup.Text);
-                Program.PrintGroups(TextBoxGroup.Text.Replace(".txt", "_groups.txt"));
+                Program.AddToDictionary(fileName);
+                Program.AddDeltaGroupMaxDiffs(fileName);
                 Program.ClearNetlist();
             }
         }

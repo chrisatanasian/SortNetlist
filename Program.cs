@@ -74,7 +74,7 @@ namespace SortNetlist
         /// <param name="fileName">Name of the file to process.</param>
         public static void ConvertRawToProcessed(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
-            StreamWriter fileOutput = new StreamWriter(fileName.Substring(0, fileName.Length - 4) + "_processed.txt");
+            StreamWriter fileOutput = new StreamWriter(fileName.Replace(".txt", "_processed.txt"));
 
             int counter = 0;
             string[] separators = { ",", "\t" };
@@ -100,7 +100,7 @@ namespace SortNetlist
 
         /// <summary>
         /// Sorts the netlist by checking the left column to see if strings are different by 1.
-        /// Outputs the sorted list into a new file with _sorted.txt at the end.
+        /// Outputs into a new file.
         /// Also adds the deltas in a new column.
         /// </summary>
         public static void SortNetlistAddDelta(string fileName) {
@@ -123,7 +123,12 @@ namespace SortNetlist
             fileOutput.Close();
         }
 
-        public static void PrintGroups(string fileName) {
+        /// <summary>
+        /// Finds maximum values of groups.
+        /// Outputs into a new file.
+        /// Adds the difference between each item in the group and its max.
+        /// </summary>
+        public static void GroupMaxDiffs(string fileName) {
             string[] groups = {"FMC_LA", "FMC_HA", "FMC_HB"};
 
             Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
@@ -185,6 +190,101 @@ namespace SortNetlist
 
             fileOutput.Close();
         }
+
+        /// <summary>
+        /// Combined method which does both SortNetlistAddDelta and GroupMaxDiffs.
+        /// </summary>
+        public static void AddDeltaGroupMaxDiffs(string fileName) {
+            string[] groups = { "FMC_LA", "FMC_HA", "FMC_HB" };
+
+            Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
+            double currentMax = -1;
+            string currentKey = "";
+
+            // Go through netlist, find all max values of groups.
+            foreach (KeyValuePair<string, double> entry in netlist) {
+                int len = groups[0].Length;
+
+                if (entry.Key.Length >= len) {
+                    string key = entry.Key.Substring(0, len);
+
+                    if (groups.Contains(key)) {
+                        if (!key.Equals(currentKey)) {
+                            if (currentMax != -1) {
+                                groupMaxs.Add(currentKey, currentMax);
+                            }
+
+                            currentMax = -1;
+                            currentKey = key;
+                        }
+
+                        if (entry.Value > currentMax) {
+                            currentMax = entry.Value;
+                        }
+                    }
+                    else {
+                        if (currentMax != -1) {
+                            groupMaxs.Add(currentKey, currentMax);
+                        }
+
+                        currentKey = "";
+                        currentMax = -1;
+                    }
+                }
+            }
+
+            StreamWriter fileOutput = new StreamWriter(fileName);
+            Dictionary<string, double> addedKeys = new Dictionary<string, double>();
+
+            foreach (KeyValuePair<string, double> entry in netlist) {
+                if (!addedKeys.ContainsKey(entry.Key)) {
+                    int len = groups[0].Length;
+
+                    if (entry.Key.Length >= len) {
+                        string key = entry.Key.Substring(0, len);
+
+                        if (!groups.Contains(key)) {
+                            fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
+                        }
+                        else {
+                            double diff = groupMaxs[key] - entry.Value;
+                            fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t" + diff);
+                        }
+                    }
+                    else {
+                        fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
+                    }
+
+                    addedKeys[entry.Key] = entry.Value;
+                }
+
+                string key_with_p = entry.Key.Replace("_N", "_P");
+                if (netlist.ContainsKey(key_with_p) && !addedKeys.ContainsKey(key_with_p)) {
+                    int len = groups[0].Length;
+
+                    if (key_with_p.Length >= len) {
+                        string key = key_with_p.Substring(0, len);
+
+                        if (!groups.Contains(key)) {
+                            fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]));
+                        }
+                        else {
+                            double diff = groupMaxs[key] - entry.Value;
+                            fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]) + "\t" + diff);
+                        }
+                    }
+                    else {
+                        fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]));
+                    }
+                    addedKeys[key_with_p] = netlist[key_with_p];
+                }
+                
+                
+            }
+
+            fileOutput.Close();
+        }
+
 
         /// <summary>
         /// The main entry point for the application.
