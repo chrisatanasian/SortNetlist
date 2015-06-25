@@ -124,10 +124,66 @@ namespace SortNetlist
         }
 
         public static void PrintGroups(string fileName) {
+            string[] groups = {"FMC_LA", "FMC_HA", "FMC_HB"};
+
+            Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
+            double currentMax = -1;
+            string currentKey = "";
+
+            // Go through netlist, find all max values of groups.
+            foreach (KeyValuePair<string, double> entry in netlist) {
+                int len = groups[0].Length;
+
+                if (entry.Key.Length >= len) {
+                    string key = entry.Key.Substring(0, len);
+                    
+                    if (groups.Contains(key)) {
+                        if (!key.Equals(currentKey)) {
+                            if (currentMax != -1) {
+                                groupMaxs.Add(currentKey, currentMax);
+                            }
+
+                            currentMax = -1;
+                            currentKey = key;
+                        }
+
+                        if (entry.Value > currentMax) {
+                            currentMax = entry.Value;
+                        }
+                    }
+                    else {
+                        if (currentMax != -1) {
+                            groupMaxs.Add(currentKey, currentMax);
+                        }
+
+                        currentKey = "";
+                        currentMax = -1;
+                    }
+                }
+            }
+
             StreamWriter fileOutput = new StreamWriter(fileName);
-            Dictionary<string, double> addedKeys = new Dictionary<string, double>();
 
+            foreach (KeyValuePair<string, double> entry in netlist) {
+                int len = groups[0].Length;
 
+                if (entry.Key.Length >= len) {
+                    string key = entry.Key.Substring(0, len);
+
+                    if (!groups.Contains(key)) {
+                        fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
+                    }
+                    else {
+                        double diff = groupMaxs[key] - entry.Value;
+                        fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t" + diff);
+                    }
+                }
+                else {
+                    fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
+                }
+            }
+
+            fileOutput.Close();
         }
 
         /// <summary>

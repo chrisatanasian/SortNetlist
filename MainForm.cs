@@ -57,5 +57,13 @@ namespace SortNetlist
             }
         }
 
+        private void ButtonGroup_Click(object sender, EventArgs e) {
+            if (!String.IsNullOrEmpty(TextBoxGroup.Text)) {
+                Program.AddToDictionary(TextBoxGroup.Text);
+                Program.PrintGroups(TextBoxGroup.Text.Replace(".txt", "_groups.txt"));
+                Program.ClearNetlist();
+            }
+        }
+
     }
 }

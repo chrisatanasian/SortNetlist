@@ -136,6 +136,7 @@
             this.ButtonGroup.TabIndex = 10;
             this.ButtonGroup.Text = "Print Groups";
             this.ButtonGroup.UseVisualStyleBackColor = true;
+            this.ButtonGroup.Click += new System.EventHandler(this.ButtonGroup_Click);
             // 
             // TextBoxGroup
             // 
