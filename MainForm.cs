@@ -38,10 +38,11 @@ namespace SortNetlist
 
                 Program.AddToDictionary(fileName);
                 Program.SortNetlistAddDelta(fileName);
-                Program.ClearNetlist();
+                Program.ClearDictionaries();
                 Program.AddToDictionary(fileName);
+                Program.FindGroupMaxs();
                 Program.AddDeltaGroupMaxDiffs(fileName);
-                Program.ClearNetlist();
+                Program.ClearDictionaries();
             }
         }
 

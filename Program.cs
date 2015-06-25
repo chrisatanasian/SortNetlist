@@ -10,6 +10,8 @@ namespace SortNetlist
     static class Program
     {
         private static Dictionary<string, double> netlist = new Dictionary<string, double>();
+        private static Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
+        private static string[] groups = { "FMC_LA", "FMC_HA", "FMC_HB" };
 
         /// <summary>
         /// Adds contents of fileName to netlist data
@@ -28,8 +30,9 @@ namespace SortNetlist
         /// <summary>
         /// Removes all elements from the netlist dictionary.
         /// </summary>
-        public static void ClearNetlist() {
+        public static void ClearDictionaries() {
             netlist.Clear();
+            groupMaxs.Clear();
         }
 
         /// <summary>
@@ -124,24 +127,18 @@ namespace SortNetlist
         }
 
         /// <summary>
-        /// Finds maximum values of groups.
-        /// Outputs into a new file.
-        /// Adds the difference between each item in the group and its max.
+        /// Goes through all groups, finds the maximums, and adds the key-value pair to groupMaxs.
         /// </summary>
-        public static void GroupMaxDiffs(string fileName) {
-            string[] groups = {"FMC_LA", "FMC_HA", "FMC_HB"};
-
-            Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
+        public static void FindGroupMaxs() {
             double currentMax = -1;
             string currentKey = "";
 
-            // Go through netlist, find all max values of groups.
             foreach (KeyValuePair<string, double> entry in netlist) {
                 int len = groups[0].Length;
 
                 if (entry.Key.Length >= len) {
                     string key = entry.Key.Substring(0, len);
-                    
+
                     if (groups.Contains(key)) {
                         if (!key.Equals(currentKey)) {
                             if (currentMax != -1) {
@@ -166,73 +163,12 @@ namespace SortNetlist
                     }
                 }
             }
-
-            StreamWriter fileOutput = new StreamWriter(fileName);
-
-            foreach (KeyValuePair<string, double> entry in netlist) {
-                int len = groups[0].Length;
-
-                if (entry.Key.Length >= len) {
-                    string key = entry.Key.Substring(0, len);
-
-                    if (!groups.Contains(key)) {
-                        fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
-                    }
-                    else {
-                        double diff = groupMaxs[key] - entry.Value;
-                        fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t" + diff);
-                    }
-                }
-                else {
-                    fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
-                }
-            }
-
-            fileOutput.Close();
         }
 
         /// <summary>
-        /// Combined method which does both SortNetlistAddDelta and GroupMaxDiffs.
+        /// Adds differences between N/P and group maximums and current key.
         /// </summary>
         public static void AddDeltaGroupMaxDiffs(string fileName) {
-            string[] groups = { "FMC_LA", "FMC_HA", "FMC_HB" };
-
-            Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
-            double currentMax = -1;
-            string currentKey = "";
-
-            // Go through netlist, find all max values of groups.
-            foreach (KeyValuePair<string, double> entry in netlist) {
-                int len = groups[0].Length;
-
-                if (entry.Key.Length >= len) {
-                    string key = entry.Key.Substring(0, len);
-
-                    if (groups.Contains(key)) {
-                        if (!key.Equals(currentKey)) {
-                            if (currentMax != -1) {
-                                groupMaxs.Add(currentKey, currentMax);
-                            }
-
-                            currentMax = -1;
-                            currentKey = key;
-                        }
-
-                        if (entry.Value > currentMax) {
-                            currentMax = entry.Value;
-                        }
-                    }
-                    else {
-                        if (currentMax != -1) {
-                            groupMaxs.Add(currentKey, currentMax);
-                        }
-
-                        currentKey = "";
-                        currentMax = -1;
-                    }
-                }
-            }
-
             StreamWriter fileOutput = new StreamWriter(fileName);
             Dictionary<string, double> addedKeys = new Dictionary<string, double>();
 
@@ -248,7 +184,7 @@ namespace SortNetlist
                         }
                         else {
                             double diff = groupMaxs[key] - entry.Value;
-                            fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t" + diff);
+                            fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t\t" + diff);
                         }
                     }
                     else {
@@ -278,8 +214,6 @@ namespace SortNetlist
                     }
                     addedKeys[key_with_p] = netlist[key_with_p];
                 }
-                
-                
             }
 
             fileOutput.Close();
