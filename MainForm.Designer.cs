@@ -39,12 +39,13 @@
             this.TextBoxProcessed = new System.Windows.Forms.TextBox();
             this.ButtonBrowseProcessed = new System.Windows.Forms.Button();
             this.LabelProcessed = new System.Windows.Forms.Label();
+            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.SuspendLayout();
             // 
             // LabelRaw
             // 
             this.LabelRaw.AutoSize = true;
-            this.LabelRaw.Location = new System.Drawing.Point(41, 41);
+            this.LabelRaw.Location = new System.Drawing.Point(25, 19);
             this.LabelRaw.Name = "LabelRaw";
             this.LabelRaw.Size = new System.Drawing.Size(48, 13);
             this.LabelRaw.TabIndex = 0;
@@ -52,7 +53,7 @@
             // 
             // ButtonBrowseRaw
             // 
-            this.ButtonBrowseRaw.Location = new System.Drawing.Point(189, 61);
+            this.ButtonBrowseRaw.Location = new System.Drawing.Point(173, 39);
             this.ButtonBrowseRaw.Name = "ButtonBrowseRaw";
             this.ButtonBrowseRaw.Size = new System.Drawing.Size(75, 23);
             this.ButtonBrowseRaw.TabIndex = 1;
@@ -62,14 +63,14 @@
             // 
             // TextBoxRaw
             // 
-            this.TextBoxRaw.Location = new System.Drawing.Point(44, 63);
+            this.TextBoxRaw.Location = new System.Drawing.Point(28, 41);
             this.TextBoxRaw.Name = "TextBoxRaw";
             this.TextBoxRaw.Size = new System.Drawing.Size(139, 20);
             this.TextBoxRaw.TabIndex = 2;
             // 
             // ButtonRaw
             // 
-            this.ButtonRaw.Location = new System.Drawing.Point(44, 90);
+            this.ButtonRaw.Location = new System.Drawing.Point(28, 68);
             this.ButtonRaw.Name = "ButtonRaw";
             this.ButtonRaw.Size = new System.Drawing.Size(139, 23);
             this.ButtonRaw.TabIndex = 3;
@@ -80,7 +81,7 @@
             // LabelGroups
             // 
             this.LabelGroups.AutoSize = true;
-            this.LabelGroups.Location = new System.Drawing.Point(296, 41);
+            this.LabelGroups.Location = new System.Drawing.Point(280, 19);
             this.LabelGroups.Name = "LabelGroups";
             this.LabelGroups.Size = new System.Drawing.Size(41, 13);
             this.LabelGroups.TabIndex = 4;
@@ -88,16 +89,16 @@
             // 
             // TextBoxGroups
             // 
-            this.TextBoxGroups.Location = new System.Drawing.Point(299, 63);
+            this.TextBoxGroups.Location = new System.Drawing.Point(266, 42);
             this.TextBoxGroups.Name = "TextBoxGroups";
-            this.TextBoxGroups.Size = new System.Drawing.Size(139, 20);
+            this.TextBoxGroups.Size = new System.Drawing.Size(276, 20);
             this.TextBoxGroups.TabIndex = 5;
             this.TextBoxGroups.Text = "FMC_LA, FMC_HA, FMC_HB";
             this.TextBoxGroups.TextChanged += new System.EventHandler(this.TextBoxGroups_TextChanged);
             // 
             // ButonProcessed
             // 
-            this.ButonProcessed.Location = new System.Drawing.Point(44, 174);
+            this.ButonProcessed.Location = new System.Drawing.Point(28, 152);
             this.ButonProcessed.Name = "ButonProcessed";
             this.ButonProcessed.Size = new System.Drawing.Size(139, 23);
             this.ButonProcessed.TabIndex = 9;
@@ -107,14 +108,14 @@
             // 
             // TextBoxProcessed
             // 
-            this.TextBoxProcessed.Location = new System.Drawing.Point(44, 147);
+            this.TextBoxProcessed.Location = new System.Drawing.Point(28, 125);
             this.TextBoxProcessed.Name = "TextBoxProcessed";
             this.TextBoxProcessed.Size = new System.Drawing.Size(139, 20);
             this.TextBoxProcessed.TabIndex = 8;
             // 
             // ButtonBrowseProcessed
             // 
-            this.ButtonBrowseProcessed.Location = new System.Drawing.Point(189, 145);
+            this.ButtonBrowseProcessed.Location = new System.Drawing.Point(173, 123);
             this.ButtonBrowseProcessed.Name = "ButtonBrowseProcessed";
             this.ButtonBrowseProcessed.Size = new System.Drawing.Size(75, 23);
             this.ButtonBrowseProcessed.TabIndex = 7;
@@ -125,7 +126,7 @@
             // LabelProcessed
             // 
             this.LabelProcessed.AutoSize = true;
-            this.LabelProcessed.Location = new System.Drawing.Point(41, 125);
+            this.LabelProcessed.Location = new System.Drawing.Point(25, 103);
             this.LabelProcessed.Name = "LabelProcessed";
             this.LabelProcessed.Size = new System.Drawing.Size(76, 13);
             this.LabelProcessed.TabIndex = 6;
@@ -135,7 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 248);
+            this.ClientSize = new System.Drawing.Size(554, 188);
             this.Controls.Add(this.ButonProcessed);
             this.Controls.Add(this.TextBoxProcessed);
             this.Controls.Add(this.ButtonBrowseProcessed);
@@ -166,6 +167,7 @@
         private System.Windows.Forms.TextBox TextBoxProcessed;
         private System.Windows.Forms.Button ButtonBrowseProcessed;
         private System.Windows.Forms.Label LabelProcessed;
+        private System.DirectoryServices.DirectoryEntry directoryEntry1;
     }
 }
 
