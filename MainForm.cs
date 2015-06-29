@@ -47,6 +47,8 @@ namespace SortNetlist
                 Program.FindGroupMaxs();
                 Program.AddDeltaGroupMaxDiffs(fileName);
                 Program.ClearDictionaries();
+
+                MessageBox.Show("Done sorting!");
             }
         }
 

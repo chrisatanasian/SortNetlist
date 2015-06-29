@@ -160,8 +160,6 @@ namespace SortNetlist
                 }
 
                 groupMaxs.Add(group, max);
-
-                Console.WriteLine("group: " + group + "\tmax: " + max);
             }
         }
 
