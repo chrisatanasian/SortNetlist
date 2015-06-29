@@ -81,33 +81,40 @@ namespace SortNetlist
         /// <summary>
         /// Takes a raw netlist file, which contains useless data in the beginning and end, and removes it.
         /// Also removes data except for the first and last parts.
-        /// Outputs the new file with _processed.txt at the end.
+        /// Outputs the new file with _sorted.txt at the end.
+        /// If first line of file is not "Net Status Report",
+        /// then it copies all the data into the _sorted file.
         /// </summary>
         /// <param name="fileName">Name of the file to process.</param>
         public static void ConvertRawToProcessed(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
-            StreamWriter fileOutput = new StreamWriter(fileName.Replace(".txt", "_sorted.txt"));
 
-            int counter = 0;
-            string[] separators = { ",", "\t" };
+            if (lines[0].Equals("Net Status Report")) {
+                int counter = 0;
+                StreamWriter fileOutput = new StreamWriter(fileName.Replace(".txt", "_sorted.txt"));
+                string[] separators = { ",", "\t" };
 
-            foreach (string line in lines) {
-                if (counter >= 7 && counter < lines.Length - 1) {
-                    string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                    for (int i = 0; i < words.Length; i++) {
-                        if (i == 0) {
-                            fileOutput.Write(words[i].Substring(4) + "\t");
+                foreach (string line in lines) {
+                    if (counter >= 7 && counter < lines.Length - 1) {
+                        string[] words = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                        for (int i = 0; i < words.Length; i++) {
+                            if (i == 0) {
+                                fileOutput.Write(words[i].Substring(4) + "\t");
+                            }
+                            else if (i == 2) {
+                                fileOutput.Write(words[i].Substring(0, words[i].Length - 2));
+                            }
                         }
-                        else if (i == 2) {
-                            fileOutput.Write(words[i].Substring(0, words[i].Length - 2));
-                        }
+                        fileOutput.WriteLine();
                     }
-                    fileOutput.WriteLine();
+                    counter++;
                 }
-                counter++;
+                fileOutput.Close();
+            }
+            else {
+                System.IO.File.Copy(fileName, fileName.Replace(".txt", "_sorted.txt"), true);
             }
 
-            fileOutput.Close();
         }
 
         /// <summary>
