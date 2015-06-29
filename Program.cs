@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace SortNetlist
-{
-    static class Program
-    {
+namespace SortNetlist {
+    static class Program {
         private static Dictionary<string, double> netlist = new Dictionary<string, double>();
         private static Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
         private static List<string> groups = new List<string> { "FMC_LA", "FMC_HA", "FMC_HB" };
@@ -54,8 +52,8 @@ namespace SortNetlist
             if (string1.Length != string2.Length) {
                 return false;
             }
-            
-            for (int i=0; i<string1.Length; i++) {
+
+            for (int i = 0; i < string1.Length; i++) {
                 if (string1[i] != string2[i]) {
                     amtDiffer += 1;
 
@@ -146,37 +144,21 @@ namespace SortNetlist
         /// Goes through all groups, finds the maximums, and adds the key-value pair to groupMaxs.
         /// </summary>
         public static void FindGroupMaxs() {
-            double currentMax = -1;
-            string currentKey = "";
-            int len = groups[0].Length;
+            foreach (string group in groups) {
+                double max = -1;
 
-            foreach (KeyValuePair<string, double> entry in netlist) {
-                if (entry.Key.Length >= len) {
-                    string key = entry.Key.Substring(0, len);
+                foreach (KeyValuePair<string, double> entry in netlist) {
+                    // See if the current key matches to any group.
+                    if (entry.Key.Length > group.Length) {
+                        string keySubstring = entry.Key.Substring(0, group.Length);
 
-                    if (groups.Contains(key)) {
-                        if (!key.Equals(currentKey)) {
-                            if (currentMax != -1) {
-                                groupMaxs.Add(currentKey, currentMax);
-                            }
-
-                            currentMax = -1;
-                            currentKey = key;
+                        if (group.Equals(keySubstring) && entry.Value > max) {
+                            max = entry.Value;
                         }
-
-                        if (entry.Value > currentMax) {
-                            currentMax = entry.Value;
-                        }
-                    }
-                    else {
-                        if (currentMax != -1) {
-                            groupMaxs.Add(currentKey, currentMax);
-                        }
-
-                        currentKey = "";
-                        currentMax = -1;
                     }
                 }
+
+                groupMaxs.Add(group, max);
             }
         }
 
