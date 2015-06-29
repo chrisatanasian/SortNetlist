@@ -42,7 +42,7 @@
             // LabelFile
             // 
             this.LabelFile.AutoSize = true;
-            this.LabelFile.Location = new System.Drawing.Point(25, 19);
+            this.LabelFile.Location = new System.Drawing.Point(24, 21);
             this.LabelFile.Name = "LabelFile";
             this.LabelFile.Size = new System.Drawing.Size(26, 13);
             this.LabelFile.TabIndex = 0;
@@ -60,14 +60,14 @@
             // 
             // TextBoxFile
             // 
-            this.TextBoxFile.Location = new System.Drawing.Point(28, 41);
+            this.TextBoxFile.Location = new System.Drawing.Point(27, 41);
             this.TextBoxFile.Name = "TextBoxFile";
             this.TextBoxFile.Size = new System.Drawing.Size(195, 20);
             this.TextBoxFile.TabIndex = 2;
             // 
             // ButtonSort
             // 
-            this.ButtonSort.Location = new System.Drawing.Point(28, 68);
+            this.ButtonSort.Location = new System.Drawing.Point(27, 67);
             this.ButtonSort.Name = "ButtonSort";
             this.ButtonSort.Size = new System.Drawing.Size(195, 23);
             this.ButtonSort.TabIndex = 3;
@@ -78,7 +78,7 @@
             // LabelGroups
             // 
             this.LabelGroups.AutoSize = true;
-            this.LabelGroups.Location = new System.Drawing.Point(25, 112);
+            this.LabelGroups.Location = new System.Drawing.Point(24, 109);
             this.LabelGroups.Name = "LabelGroups";
             this.LabelGroups.Size = new System.Drawing.Size(44, 13);
             this.LabelGroups.TabIndex = 4;
@@ -86,7 +86,7 @@
             // 
             // TextBoxGroups
             // 
-            this.TextBoxGroups.Location = new System.Drawing.Point(28, 128);
+            this.TextBoxGroups.Location = new System.Drawing.Point(27, 128);
             this.TextBoxGroups.Name = "TextBoxGroups";
             this.TextBoxGroups.Size = new System.Drawing.Size(195, 20);
             this.TextBoxGroups.TabIndex = 5;
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 168);
+            this.ClientSize = new System.Drawing.Size(324, 172);
             this.Controls.Add(this.ButtonClear);
             this.Controls.Add(this.TextBoxGroups);
             this.Controls.Add(this.LabelGroups);
@@ -115,6 +115,8 @@
             this.Controls.Add(this.TextBoxFile);
             this.Controls.Add(this.ButtonBrowse);
             this.Controls.Add(this.LabelFile);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Sort Netlist by Chris Atanasian";
             this.ResumeLayout(false);
