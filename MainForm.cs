@@ -31,32 +31,14 @@ namespace SortNetlist
         }
 
         private void ButtonBrowseRaw_Click(object sender, EventArgs e) {
-            Browse(TextBoxRaw);
-        }
-
-        private void ButtonBrowseProcessed_Click(object sender, EventArgs e) {
-            Browse(TextBoxProcessed);
+            Browse(TextBoxFile);
         }
 
         private void ButtonRaw_Click(object sender, EventArgs e) {
-            if (!String.IsNullOrEmpty(TextBoxRaw.Text)) {
-                Program.ConvertRawToProcessed(TextBoxRaw.Text);
+            if (!String.IsNullOrEmpty(TextBoxFile.Text)) {
+                Program.ConvertRawToProcessed(TextBoxFile.Text);
 
-                string fileName = TextBoxRaw.Text.Replace(".txt", "_processed.txt");
-
-                Program.AddToDictionary(fileName);
-                Program.SortNetlistAddDelta(fileName);
-                Program.ClearDictionaries();
-                Program.AddToDictionary(fileName);
-                Program.FindGroupMaxs();
-                Program.AddDeltaGroupMaxDiffs(fileName);
-                Program.ClearDictionaries();
-            }
-        }
-
-        private void ButonProcessed_Click(object sender, EventArgs e) {
-            if (!String.IsNullOrEmpty(TextBoxProcessed.Text)) {
-                string fileName = TextBoxProcessed.Text;
+                string fileName = TextBoxFile.Text.Replace(".txt", "_sorted.txt");
 
                 Program.AddToDictionary(fileName);
                 Program.SortNetlistAddDelta(fileName);

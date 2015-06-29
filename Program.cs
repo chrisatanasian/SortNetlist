@@ -86,7 +86,7 @@ namespace SortNetlist
         /// <param name="fileName">Name of the file to process.</param>
         public static void ConvertRawToProcessed(string fileName) {
             var lines = System.IO.File.ReadAllLines(fileName);
-            StreamWriter fileOutput = new StreamWriter(fileName.Replace(".txt", "_processed.txt"));
+            StreamWriter fileOutput = new StreamWriter(fileName.Replace(".txt", "_sorted.txt"));
 
             int counter = 0;
             string[] separators = { ",", "\t" };
