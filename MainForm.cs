@@ -49,5 +49,9 @@ namespace SortNetlist
                 Program.ClearDictionaries();
             }
         }
+
+        private void ButtonClear_Click(object sender, EventArgs e) {
+            TextBoxGroups.Text = "";
+        }
     }
 }

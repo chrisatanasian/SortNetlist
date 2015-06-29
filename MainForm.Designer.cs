@@ -36,6 +36,7 @@
             this.LabelGroups = new System.Windows.Forms.Label();
             this.TextBoxGroups = new System.Windows.Forms.TextBox();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
+            this.ButtonClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LabelFile
@@ -53,7 +54,7 @@
             this.ButtonBrowse.Name = "ButtonBrowse";
             this.ButtonBrowse.Size = new System.Drawing.Size(75, 23);
             this.ButtonBrowse.TabIndex = 1;
-            this.ButtonBrowse.Text = "browse";
+            this.ButtonBrowse.Text = "Browse";
             this.ButtonBrowse.UseVisualStyleBackColor = true;
             this.ButtonBrowse.Click += new System.EventHandler(this.ButtonBrowseRaw_Click);
             // 
@@ -87,16 +88,27 @@
             // 
             this.TextBoxGroups.Location = new System.Drawing.Point(28, 128);
             this.TextBoxGroups.Name = "TextBoxGroups";
-            this.TextBoxGroups.Size = new System.Drawing.Size(276, 20);
+            this.TextBoxGroups.Size = new System.Drawing.Size(195, 20);
             this.TextBoxGroups.TabIndex = 5;
             this.TextBoxGroups.Text = "FMC_LA, FMC_HA, FMC_HB";
             this.TextBoxGroups.TextChanged += new System.EventHandler(this.TextBoxGroups_TextChanged);
+            // 
+            // ButtonClear
+            // 
+            this.ButtonClear.Location = new System.Drawing.Point(229, 128);
+            this.ButtonClear.Name = "ButtonClear";
+            this.ButtonClear.Size = new System.Drawing.Size(75, 23);
+            this.ButtonClear.TabIndex = 6;
+            this.ButtonClear.Text = "Clear";
+            this.ButtonClear.UseVisualStyleBackColor = true;
+            this.ButtonClear.Click += new System.EventHandler(this.ButtonClear_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 188);
+            this.ClientSize = new System.Drawing.Size(337, 168);
+            this.Controls.Add(this.ButtonClear);
             this.Controls.Add(this.TextBoxGroups);
             this.Controls.Add(this.LabelGroups);
             this.Controls.Add(this.ButtonSort);
@@ -120,6 +132,7 @@
         private System.Windows.Forms.Label LabelGroups;
         private System.Windows.Forms.TextBox TextBoxGroups;
         private System.DirectoryServices.DirectoryEntry directoryEntry1;
+        private System.Windows.Forms.Button ButtonClear;
     }
 }
 
