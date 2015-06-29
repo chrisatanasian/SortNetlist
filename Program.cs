@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace SortNetlist {
-    static class Program {
+namespace SortNetlist
+{
+    static class Program
+    {
         private static Dictionary<string, double> netlist = new Dictionary<string, double>();
         private static Dictionary<string, double> groupMaxs = new Dictionary<string, double>();
         private static List<string> groups = new List<string> { "FMC_LA", "FMC_HA", "FMC_HB" };
@@ -52,8 +54,8 @@ namespace SortNetlist {
             if (string1.Length != string2.Length) {
                 return false;
             }
-
-            for (int i = 0; i < string1.Length; i++) {
+            
+            for (int i=0; i<string1.Length; i++) {
                 if (string1[i] != string2[i]) {
                     amtDiffer += 1;
 
@@ -148,7 +150,6 @@ namespace SortNetlist {
                 double max = -1;
 
                 foreach (KeyValuePair<string, double> entry in netlist) {
-                    // See if the current key matches to any group.
                     if (entry.Key.Length > group.Length) {
                         string keySubstring = entry.Key.Substring(0, group.Length);
 
@@ -159,6 +160,8 @@ namespace SortNetlist {
                 }
 
                 groupMaxs.Add(group, max);
+
+                Console.WriteLine("group: " + group + "\tmax: " + max);
             }
         }
 
@@ -171,20 +174,24 @@ namespace SortNetlist {
 
             foreach (KeyValuePair<string, double> entry in netlist) {
                 if (!addedKeys.ContainsKey(entry.Key)) {
-                    int len = groups[0].Length;
+                    bool write = true;
 
-                    if (entry.Key.Length >= len) {
-                        string key = entry.Key.Substring(0, len);
+                    foreach (string group in groups) {
+                        int len = group.Length;
 
-                        if (!groups.Contains(key)) {
-                            fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
-                        }
-                        else {
-                            double diff = groupMaxs[key] - entry.Value;
-                            fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t\t" + diff);
+                        if (entry.Key.Length >= len) {
+                            string keySubstring = entry.Key.Substring(0, len);
+
+                            if (group.Equals(keySubstring)) {
+                                double diff = groupMaxs[keySubstring] - entry.Value;
+                                fileOutput.WriteLine(entry.Key + "\t" + entry.Value + "\t\t" + diff);
+                                write = false;
+                                break;
+                            }
                         }
                     }
-                    else {
+
+                    if (write) {
                         fileOutput.WriteLine(entry.Key + "\t" + entry.Value);
                     }
 
@@ -192,23 +199,29 @@ namespace SortNetlist {
                 }
 
                 string key_with_p = entry.Key.Replace("_N", "_P");
+
                 if (netlist.ContainsKey(key_with_p) && !addedKeys.ContainsKey(key_with_p)) {
-                    int len = groups[0].Length;
+                    bool write = true;
 
-                    if (key_with_p.Length >= len) {
-                        string key = key_with_p.Substring(0, len);
+                    foreach (string group in groups) {
+                        int len = group.Length;
 
-                        if (!groups.Contains(key)) {
-                            fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]));
-                        }
-                        else {
-                            double diff = groupMaxs[key] - entry.Value;
-                            fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]) + "\t" + diff);
+                        if (key_with_p.Length >= len) {
+                            string keySubstring = key_with_p.Substring(0, len);
+
+                            if (group.Equals(keySubstring)) {
+                                double diff = groupMaxs[keySubstring] - netlist[key_with_p];
+                                fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]) + "\t" + diff);
+                                write = false;
+                                break;
+                            }
                         }
                     }
-                    else {
+
+                    if (write) {
                         fileOutput.WriteLine(key_with_p + "\t" + netlist[key_with_p] + "\t" + (netlist[key_with_p] - netlist[entry.Key]));
                     }
+
                     addedKeys[key_with_p] = netlist[key_with_p];
                 }
             }
