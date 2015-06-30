@@ -36,11 +36,14 @@ namespace SortNetlist
         }
 
         public static void ChangeGroups(string groupTextBox) {
-            string[] groupNames = groupTextBox.Split(',');
-
             groups.Clear();
-            foreach (string groupName in groupNames) {
-                groups.Add(groupName.Replace(" ", ""));
+
+            if (groups.Count > 0) {
+                string[] groupNames = groupTextBox.Split(',');
+
+                foreach (string groupName in groupNames) {
+                    groups.Add(groupName.Replace(" ", ""));
+                }
             }
         }
 
