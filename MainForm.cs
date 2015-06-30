@@ -50,6 +50,9 @@ namespace SortNetlist
 
                 MessageBox.Show("Done sorting!");
             }
+            else {
+                MessageBox.Show("Please select a file.");
+            }
         }
 
         private void ButtonClear_Click(object sender, EventArgs e) {
